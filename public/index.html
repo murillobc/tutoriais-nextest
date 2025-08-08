@@ -3,69 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Nextest - Teste</title>
+    <title>Portal Nextest - Funcionando!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 600px;
+            max-width: 800px;
             margin: 50px auto;
             padding: 20px;
             line-height: 1.6;
+            background: linear-gradient(135deg, #0075C5 0%, #01283E 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         
         .status {
-            padding: 10px;
-            border-radius: 5px;
-            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: bold;
         }
         
-        .success { background: #d4edda; color: #155724; }
-        .error { background: #f8d7da; color: #721c24; }
-        .info { background: #d1ecf1; color: #0c5460; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
         
         button {
-            background: #007bff;
+            background: #0075C5;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            border-radius: 8px;
             cursor: pointer;
-            margin: 5px;
+            margin: 8px;
+            font-size: 16px;
+            transition: background 0.3s;
         }
         
-        button:hover { background: #0056b3; }
+        button:hover { background: #005a9e; }
         
         input {
-            padding: 8px;
-            margin: 5px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            width: 200px;
+            padding: 12px;
+            margin: 8px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            width: 250px;
+            font-size: 16px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #0075C5;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <h1>🚀 Portal Nextest - Teste de API</h1>
-    
-    <div id="status" class="status info">
-        <strong>Status:</strong> Verificando API...
+    <div class="container">
+        <div class="logo">
+            <h1>🚀 Portal de Tutoriais Nextest</h1>
+            <p><strong>✅ FUNCIONANDO!</strong> - A API está respondendo corretamente</p>
+        </div>
+        
+        <div id="status" class="status info">
+            <strong>Status da API:</strong> Verificando...
+        </div>
+        
+        <div class="test-section">
+            <h3>🧪 Teste de Login</h3>
+            <div>
+                <input type="email" id="email" placeholder="email@nextest.com.br" value="teste@nextest.com.br">
+                <button onclick="testLogin()">🔑 Testar Login</button>
+            </div>
+            
+            <div style="margin-top: 15px;">
+                <input type="text" id="code" placeholder="123456" maxlength="6">
+                <button onclick="testVerify()">✅ Testar Verificação</button>
+            </div>
+        </div>
+        
+        <div id="result"></div>
+        
+        <div class="test-section">
+            <h3>📋 Logs de Teste</h3>
+            <pre id="logs">Carregando...</pre>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔗 Links Úteis</h3>
+            <p>
+                <strong>Health Check:</strong> 
+                <a href="/api/health" target="_blank">/api/health</a>
+            </p>
+            <p>
+                <strong>GitHub:</strong> 
+                <a href="https://github.com/murillobs/tutorials-nextest" target="_blank">Ver Código</a>
+            </p>
+        </div>
     </div>
-    
-    <h3>Teste de Login</h3>
-    <div>
-        <input type="email" id="email" placeholder="email@nextest.com.br" value="teste@nextest.com.br">
-        <button onclick="testLogin()">Testar Login</button>
-    </div>
-    
-    <div>
-        <input type="text" id="code" placeholder="123456" maxlength="6">
-        <button onclick="testVerify()">Testar Verificação</button>
-    </div>
-    
-    <div id="result"></div>
-    
-    <h3>Logs</h3>
-    <div id="logs" style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-family: monospace; white-space: pre-wrap;"></div>
 
     <script>
         let logs = [];
@@ -73,40 +133,49 @@
         function addLog(message) {
             const timestamp = new Date().toLocaleTimeString();
             logs.push(`[${timestamp}] ${message}`);
-            document.getElementById('logs').textContent = logs.slice(-10).join('\n');
+            document.getElementById('logs').textContent = logs.slice(-8).join('\n');
         }
         
         async function checkHealth() {
             try {
-                addLog('Verificando /api/health...');
+                addLog('🔍 Verificando status da API...');
                 const response = await fetch('/api/health');
                 const data = await response.json();
                 
                 const statusDiv = document.getElementById('status');
                 if (response.ok) {
                     statusDiv.className = 'status success';
-                    statusDiv.innerHTML = `<strong>✅ API Funcionando:</strong> ${data.status} - DB: ${data.database} - Email: ${data.email}`;
-                    addLog('✅ Health check OK');
+                    statusDiv.innerHTML = `
+                        <strong>✅ API Online!</strong><br>
+                        📊 Status: ${data.status}<br>
+                        🗄️ Database: ${data.database}<br>
+                        📧 Email: ${data.email}<br>
+                        🌐 Environment: ${data.environment}
+                    `;
+                    addLog('✅ Health check passou!');
                 } else {
-                    statusDiv.className = 'status error';
-                    statusDiv.innerHTML = `<strong>❌ Erro:</strong> ${data.message}`;
-                    addLog('❌ Health check falhou');
+                    throw new Error(`HTTP ${response.status}`);
                 }
                 
-                addLog('Resposta: ' + JSON.stringify(data, null, 2));
+                addLog('📄 Resposta completa: ' + JSON.stringify(data, null, 2));
             } catch (error) {
                 const statusDiv = document.getElementById('status');
                 statusDiv.className = 'status error';
                 statusDiv.innerHTML = '<strong>❌ API Offline:</strong> ' + error.message;
-                addLog('❌ Erro na requisição: ' + error.message);
+                addLog('❌ Erro: ' + error.message);
             }
         }
         
         async function testLogin() {
             const email = document.getElementById('email').value;
             
+            if (!email.endsWith('@nextest.com.br')) {
+                addLog('❌ Email deve ser @nextest.com.br');
+                return;
+            }
+            
             try {
-                addLog(`Testando login com: ${email}`);
+                addLog(`🔑 Testando login: ${email}`);
                 const response = await fetch('/api/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -117,16 +186,16 @@
                 
                 document.getElementById('result').innerHTML = `
                     <div class="${response.ok ? 'success' : 'error'} status">
-                        <strong>Login Result:</strong><br>
+                        <strong>📋 Resultado do Login:</strong>
                         <pre>${JSON.stringify(data, null, 2)}</pre>
                     </div>
                 `;
                 
                 if (data.debugCode) {
                     document.getElementById('code').value = data.debugCode;
-                    addLog(`✅ Login OK - Código: ${data.debugCode}`);
+                    addLog(`✅ Login OK! Código gerado: ${data.debugCode}`);
                 } else {
-                    addLog('❌ Login falhou');
+                    addLog('❌ Login falhou: ' + data.message);
                 }
                 
             } catch (error) {
@@ -138,8 +207,13 @@
             const email = document.getElementById('email').value;
             const code = document.getElementById('code').value;
             
+            if (!code || code.length !== 6) {
+                addLog('❌ Código deve ter 6 dígitos');
+                return;
+            }
+            
             try {
-                addLog(`Testando verificação: ${email} / ${code}`);
+                addLog(`✅ Testando verificação: ${code}`);
                 const response = await fetch('/api/auth/verify', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -150,20 +224,36 @@
                 
                 document.getElementById('result').innerHTML = `
                     <div class="${response.ok ? 'success' : 'error'} status">
-                        <strong>Verify Result:</strong><br>
+                        <strong>🔐 Resultado da Verificação:</strong>
                         <pre>${JSON.stringify(data, null, 2)}</pre>
                     </div>
                 `;
                 
-                addLog(response.ok ? '✅ Verificação OK' : '❌ Verificação falhou');
+                if (response.ok) {
+                    addLog(`✅ Verificação OK! Usuário: ${data.user?.name}`);
+                } else {
+                    addLog('❌ Verificação falhou: ' + data.message);
+                }
                 
             } catch (error) {
                 addLog('❌ Erro na verificação: ' + error.message);
             }
         }
         
-        // Verificar health ao carregar
-        document.addEventListener('DOMContentLoaded', checkHealth);
+        // Auto-executar ao carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            addLog('🚀 Portal carregado com sucesso!');
+            checkHealth();
+        });
+        
+        // Atalhos de teclado
+        document.getElementById('email').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') testLogin();
+        });
+        
+        document.getElementById('code').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') testVerify();
+        });
     </script>
 </body>
 </html>

@@ -3,221 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Tutoriais Nextest</title>
+    <title>Portal Nextest - Teste</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0075C5 0%, #01283E 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
             padding: 20px;
-        }
-        
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        
-        .logo {
-            max-width: 200px;
-            margin-bottom: 30px;
-        }
-        
-        h1 {
-            color: #01283E;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
-        }
-        
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        input:focus {
-            outline: none;
-            border-color: #0075C5;
-        }
-        
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #0075C5;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        button:hover {
-            background: #005a9e;
-        }
-        
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-        
-        .message {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 8px;
-        }
-        
-        .success {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        
-        .verify-section {
-            display: none;
+            line-height: 1.6;
         }
         
         .status {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #0075C5;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        button:hover { background: #0056b3; }
+        
+        input {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            width: 200px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://educanextest.com.br/wp-content/uploads/2024/04/Group-13Logo-Horizontal-Educa-SVG-Fix.svg" alt="Nextest Logo" class="logo">
-        
-        <h1>Portal de Tutoriais</h1>
-        
-        <!-- Seção de Login -->
-        <div id="login-section">
-            <div class="form-group">
-                <label for="email">Email @nextest.com.br</label>
-                <input type="email" id="email" placeholder="seu.email@nextest.com.br" required>
-            </div>
-            
-            <button onclick="login()" id="login-btn">
-                Enviar Código de Verificação
-            </button>
-        </div>
-        
-        <!-- Seção de Verificação -->
-        <div id="verify-section" class="verify-section">
-            <div class="form-group">
-                <label for="code">Código de Verificação</label>
-                <input type="text" id="code" placeholder="123456" maxlength="6" required>
-            </div>
-            
-            <button onclick="verify()" id="verify-btn">
-                Verificar Código
-            </button>
-            
-            <button onclick="backToLogin()" style="background: #6c757d; margin-top: 10px;">
-                Voltar
-            </button>
-        </div>
-        
-        <!-- Seção do Dashboard -->
-        <div id="dashboard-section" class="verify-section">
-            <h2>Bem-vindo!</h2>
-            <p id="user-info"></p>
-            
-            <button onclick="logout()" style="background: #dc3545; margin-top: 20px;">
-                Sair
-            </button>
-        </div>
-        
-        <!-- Mensagens -->
-        <div id="message"></div>
-        
-        <!-- Status da API -->
-        <div class="status">
-            <strong>Status da API:</strong> <span id="api-status">Verificando...</span>
-        </div>
+    <h1>🚀 Portal Nextest - Teste de API</h1>
+    
+    <div id="status" class="status info">
+        <strong>Status:</strong> Verificando API...
     </div>
+    
+    <h3>Teste de Login</h3>
+    <div>
+        <input type="email" id="email" placeholder="email@nextest.com.br" value="teste@nextest.com.br">
+        <button onclick="testLogin()">Testar Login</button>
+    </div>
+    
+    <div>
+        <input type="text" id="code" placeholder="123456" maxlength="6">
+        <button onclick="testVerify()">Testar Verificação</button>
+    </div>
+    
+    <div id="result"></div>
+    
+    <h3>Logs</h3>
+    <div id="logs" style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-family: monospace; white-space: pre-wrap;"></div>
 
     <script>
-        let currentUser = null;
+        let logs = [];
         
-        // Verificar status da API
-        async function checkApiStatus() {
+        function addLog(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            logs.push(`[${timestamp}] ${message}`);
+            document.getElementById('logs').textContent = logs.slice(-10).join('\n');
+        }
+        
+        async function checkHealth() {
             try {
+                addLog('Verificando /api/health...');
                 const response = await fetch('/api/health');
                 const data = await response.json();
                 
-                document.getElementById('api-status').innerHTML = `
-                    ${data.status} - DB: ${data.database} - Email: ${data.email}
-                `;
-                document.getElementById('api-status').style.color = data.status === 'OK' ? 'green' : 'red';
-            } catch (error) {
-                document.getElementById('api-status').innerHTML = 'API Offline';
-                document.getElementById('api-status').style.color = 'red';
-            }
-        }
-        
-        // Verificar se usuário já está logado
-        async function checkAuth() {
-            try {
-                const response = await fetch('/api/auth/me');
+                const statusDiv = document.getElementById('status');
                 if (response.ok) {
-                    const data = await response.json();
-                    showDashboard(data.user);
+                    statusDiv.className = 'status success';
+                    statusDiv.innerHTML = `<strong>✅ API Funcionando:</strong> ${data.status} - DB: ${data.database} - Email: ${data.email}`;
+                    addLog('✅ Health check OK');
+                } else {
+                    statusDiv.className = 'status error';
+                    statusDiv.innerHTML = `<strong>❌ Erro:</strong> ${data.message}`;
+                    addLog('❌ Health check falhou');
                 }
+                
+                addLog('Resposta: ' + JSON.stringify(data, null, 2));
             } catch (error) {
-                console.log('Usuário não logado');
+                const statusDiv = document.getElementById('status');
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '<strong>❌ API Offline:</strong> ' + error.message;
+                addLog('❌ Erro na requisição: ' + error.message);
             }
         }
         
-        // Login
-        async function login() {
+        async function testLogin() {
             const email = document.getElementById('email').value;
-            const btn = document.getElementById('login-btn');
-            
-            if (!email.endsWith('@nextest.com.br')) {
-                showMessage('Email deve ser do domínio @nextest.com.br', 'error');
-                return;
-            }
-            
-            btn.disabled = true;
-            btn.textContent = 'Enviando...';
             
             try {
+                addLog(`Testando login com: ${email}`);
                 const response = await fetch('/api/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -226,38 +115,31 @@
                 
                 const data = await response.json();
                 
-                if (response.ok) {
-                    showMessage(data.message, 'success');
-                    if (data.debugCode) {
-                        showMessage(`Código de DEBUG: ${data.debugCode}`, 'error');
-                    }
-                    showVerifySection();
+                document.getElementById('result').innerHTML = `
+                    <div class="${response.ok ? 'success' : 'error'} status">
+                        <strong>Login Result:</strong><br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+                
+                if (data.debugCode) {
+                    document.getElementById('code').value = data.debugCode;
+                    addLog(`✅ Login OK - Código: ${data.debugCode}`);
                 } else {
-                    showMessage(data.message, 'error');
+                    addLog('❌ Login falhou');
                 }
+                
             } catch (error) {
-                showMessage('Erro ao conectar com servidor', 'error');
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Enviar Código de Verificação';
+                addLog('❌ Erro no login: ' + error.message);
             }
         }
         
-        // Verificar código
-        async function verify() {
+        async function testVerify() {
             const email = document.getElementById('email').value;
             const code = document.getElementById('code').value;
-            const btn = document.getElementById('verify-btn');
-            
-            if (code.length !== 6) {
-                showMessage('Código deve ter 6 dígitos', 'error');
-                return;
-            }
-            
-            btn.disabled = true;
-            btn.textContent = 'Verificando...';
             
             try {
+                addLog(`Testando verificação: ${email} / ${code}`);
                 const response = await fetch('/api/auth/verify', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -266,80 +148,22 @@
                 
                 const data = await response.json();
                 
-                if (response.ok) {
-                    showMessage('Login realizado com sucesso!', 'success');
-                    showDashboard(data.user);
-                } else {
-                    showMessage(data.message, 'error');
-                }
+                document.getElementById('result').innerHTML = `
+                    <div class="${response.ok ? 'success' : 'error'} status">
+                        <strong>Verify Result:</strong><br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+                
+                addLog(response.ok ? '✅ Verificação OK' : '❌ Verificação falhou');
+                
             } catch (error) {
-                showMessage('Erro ao verificar código', 'error');
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Verificar Código';
+                addLog('❌ Erro na verificação: ' + error.message);
             }
         }
         
-        // Logout
-        function logout() {
-            document.getElementById('login-section').style.display = 'block';
-            document.getElementById('verify-section').style.display = 'none';
-            document.getElementById('dashboard-section').style.display = 'none';
-            document.getElementById('email').value = '';
-            document.getElementById('code').value = '';
-            showMessage('Logout realizado com sucesso', 'success');
-            currentUser = null;
-        }
-        
-        // Mostrar seção de verificação
-        function showVerifySection() {
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('verify-section').style.display = 'block';
-            document.getElementById('code').focus();
-        }
-        
-        // Voltar para login
-        function backToLogin() {
-            document.getElementById('login-section').style.display = 'block';
-            document.getElementById('verify-section').style.display = 'none';
-            document.getElementById('code').value = '';
-        }
-        
-        // Mostrar dashboard
-        function showDashboard(user) {
-            currentUser = user;
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('verify-section').style.display = 'none';
-            document.getElementById('dashboard-section').style.display = 'block';
-            document.getElementById('user-info').textContent = `${user.name} (${user.email})`;
-        }
-        
-        // Mostrar mensagem
-        function showMessage(message, type) {
-            const messageDiv = document.getElementById('message');
-            messageDiv.textContent = message;
-            messageDiv.className = `message ${type}`;
-            
-            setTimeout(() => {
-                messageDiv.textContent = '';
-                messageDiv.className = '';
-            }, 5000);
-        }
-        
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', () => {
-            checkApiStatus();
-            checkAuth();
-            
-            // Enter para submeter
-            document.getElementById('email').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') login();
-            });
-            
-            document.getElementById('code').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') verify();
-            });
-        });
+        // Verificar health ao carregar
+        document.addEventListener('DOMContentLoaded', checkHealth);
     </script>
 </body>
 </html>

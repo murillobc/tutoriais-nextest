@@ -159,7 +159,7 @@ export default function Login() {
     <div className="glass-effect rounded-3xl shadow-2xl p-8 w-full max-w-md animate-slide-up">
       <div className="text-center mb-8">
         <img 
-          src="https://educanextest.com.br/wp-content/uploads/2024/04/Group-13Logo-Horizontal-Educa-SVG-Fix.svg" 
+          src="https://educanextest.com.br/lovable-uploads/bb450ec0-408d-48fd-8658-aaa1bbbfec7d.png" 
           alt="Educa Nextest Logo" 
           className="w-48 mx-auto mb-6 drop-shadow-sm"
         />
